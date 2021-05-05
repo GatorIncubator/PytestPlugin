@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
-    - name: Set up grading environment
+    - name: Set up checking environment
       run: |
         curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
         pyenv install 3.6.3
