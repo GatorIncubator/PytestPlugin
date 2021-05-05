@@ -17,9 +17,9 @@ OS="$(uname)"
 
 # collect the files on MacOS and Linux
 if [[ "$OS" == "Darwin" ]]; then
-    FILES=$(find -E . -type f -regex '\./(termfrequency|tests)/.*.py')
+    FILES=$(find -E . -type f -regex '\./(pytestplugin|tests)/.*.py')
 else
-    FILES=$(find . -type f -regextype posix-extended -regex '\./(termfrequency|tests)/.*.py')
+    FILES=$(find . -type f -regextype posix-extended -regex '\./(pytestplugin|tests)/.*.py')
 fi
 
 # Notes about the linters run on Linux and MacOS:

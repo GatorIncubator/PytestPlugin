@@ -39,11 +39,3 @@ jobs:
       run: |
         pipenv run pytest
       #continue-on-error: true
-    - name: Check practical
-      run: |
-        gradle grade
-        #continue-on-error: true
-      if: always()
-      env:
-        PIPENV_VENV_IN_PROJECT: 1
-        PIPENV_IGNORE_VIRTUALENVS: 1
