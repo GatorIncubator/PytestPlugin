@@ -3,7 +3,7 @@ name: build
 on: push
 
 jobs:
-  grade:
+  test:
     runs-on: ubuntu-latest
     steps:
     - run: |
@@ -32,9 +32,6 @@ jobs:
       run: |
         pipenv run pylint pytestplugin
       #continue-on-error: true
-    - name: Check pydocstyle
-      run: |
-        pipenv run pydocstyle
     - name: Run testing
       run: |
         pipenv run pytest
