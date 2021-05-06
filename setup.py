@@ -4,13 +4,6 @@
 from setuptools import setup
 
 
-MODULE_NAME = "pytest-md-report"
-REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
-REQUIREMENT_DIR = "requirements"
-ENCODING = "utf8"
-
-pkg_info = {}  # type: Dict[str, str]
-
 setup(
     name='pytest-plugin',
     version='0.1.0',

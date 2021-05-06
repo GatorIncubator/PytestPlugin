@@ -8,7 +8,6 @@ exclude = '''
       \.eggs
     | \.git
     | \.mypy_cache
-    | \.tox
     | \.venv
     | \.pytype
     | _build
@@ -30,7 +29,6 @@ multi_line_output = 3
 skip_glob = [
     '*/.eggs/*',
     '*/.pytype/*',
-    '*/.tox/*',
 ]
 
 [tool.pytest.ini_options]
