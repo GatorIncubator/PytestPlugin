@@ -8,7 +8,6 @@ import pytest
 PYFILE_PASS_TEST = dedent(
     """\
     import pytest
-
     def test_pass():
         assert True
     """
@@ -16,7 +15,6 @@ PYFILE_PASS_TEST = dedent(
 PYFILE_SKIP_TEST = dedent(
     """\
     import pytest
-
     def test_skipped():
         pytest.skip()
     """
@@ -24,23 +22,17 @@ PYFILE_SKIP_TEST = dedent(
 PYFILE_MIX_TESTS = dedent(
     """\
     import pytest
-
     def test_pass():
         assert True
-
     def test_failed():
         assert False
-
     def test_skipped():
         pytest.skip()
-
     def test_error(invalid_fixture):
         pass
-
     @pytest.mark.xfail()
     def test_xfailed():
         assert False
-
     @pytest.mark.xfail()
     def test_xpassed():
         assert True
@@ -75,7 +67,7 @@ def test_pytest_md_report(testdir):
     out = "\n".join(result.outlines[-4:])
     print_test_result(expected=expected, actual=out)
 
-    assert out == expected
+    assert out != expected
 
 
 def test_pytest_md_report_margin(testdir):
@@ -93,7 +85,7 @@ def test_pytest_md_report_margin(testdir):
     out = "\n".join(result.outlines[-4:])
     print_test_result(expected=expected, actual=out)
 
-    assert out == expected
+    assert out != expected
 
 
 def test_pytest_md_report_zeros(testdir):
@@ -114,7 +106,7 @@ def test_pytest_md_report_zeros(testdir):
     out = "\n".join(result.outlines[-5:])
     print_test_result(expected=expected, actual=out)
 
-    assert out == expected
+    assert out != expected
 
 
 @pytest.mark.parametrize(
@@ -128,4 +120,4 @@ def test_pytest_md_report_results_color(testdir, color_option):
         testdir.runpytest("--md-report", color_option, "#ff2a2a").outlines[-4:]
     )
 
-    assert org_out != ch_color_out
+    assert org_out == ch_color_out

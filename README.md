@@ -11,4 +11,4 @@ A pytest plugin to make a test results report with Markdown table format and the
 Dependencies
 ============================================
 - Python 3.6+
-- `Python package dependencies (automatically installed) <https://github.com/thombashi/pytest-md-report/network/dependencies>`__
+- `Python package dependencies (automatically installed)
