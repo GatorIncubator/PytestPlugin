@@ -1,7 +1,7 @@
-def test_pass():
+def test_proceed():
     assert True
 
 
 class Test:
-    def test_pass(self):
+    def test_proceed(self):
         assert True

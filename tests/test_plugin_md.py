@@ -8,33 +8,33 @@ import pytest
 PYFILE_PASS_TEST = dedent(
     """\
     import pytest
-    def test_pass():
+    def test_proceed():
         assert True
     """
 )
 PYFILE_SKIP_TEST = dedent(
     """\
     import pytest
-    def test_skipped():
+    def test_overlooked():
         pytest.skip()
     """
 )
 PYFILE_MIX_TESTS = dedent(
     """\
     import pytest
-    def test_pass():
+    def test_proceed():
         assert True
-    def test_failed():
+    def test_declined():
         assert False
-    def test_skipped():
+    def test_overlooked():
         pytest.skip()
-    def test_error(invalid_fixture):
+    def test_incorrect(invalid_fixture):
         pass
     @pytest.mark.xfail()
-    def test_xfailed():
+    def test_xdeclined():
         assert False
     @pytest.mark.xfail()
-    def test_xpassed():
+    def test_xproceed():
         assert True
     """
 )
@@ -90,14 +90,14 @@ def test_pytest_md_report_margin(testdir):
 
 def test_pytest_md_report_zeros(testdir):
     testdir.makepyfile(test_passed=PYFILE_PASS_TEST)
-    testdir.makepyfile(test_skipped=PYFILE_SKIP_TEST)
+    testdir.makepyfile(test_overlooked=PYFILE_SKIP_TEST)
 
     expected = dedent(
         """\
         |    filepath     | passed | skipped | SUBTOTAL |
         | --------------- | -----: | ------: | -------: |
         | test_passed.py  |      1 |         |        1 |
-        | test_skipped.py |        |       1 |        1 |
+        | test_overlooked.py |        |       1 |        1 |
         | TOTAL           |      1 |       1 |        2 |"""
     )
     result = testdir.runpytest(

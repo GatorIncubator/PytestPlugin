@@ -1,7 +1,7 @@
-def test_failed():
+def test_declined():
     assert False
 
 
 class Test:
-    def test_failed(self):
+    def test_declined(self):
         assert False

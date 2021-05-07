@@ -2,11 +2,11 @@ import pytest
 
 
 @pytest.mark.xfail()
-def test_xpassed():
+def test_xproceed():
     assert True
 
 
 class Test:
     @pytest.mark.xfail()
-    def test_xpassed(self):
+    def test_xproceed(self):
         assert True
