@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[tool.black]
+line-length = 100
+exclude = '''
+/(
+      \.eggs
+    | \.git
+    | \.mypy_cache
+    | \.venv
+    | \.pytype
+    | _build
+    | buck-out
+    | build
+    | dist
+)/
+| docs/conf.py
+'''
+
+[tool.isort]
+known_third_party = [
+    "mock",
+]
+include_trailing_comma = true
+line_length = 100
+lines_after_imports = 2
+multi_line_output = 3
+skip_glob = [
+    '*/.eggs/*',
+    '*/.pytype/*',
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]

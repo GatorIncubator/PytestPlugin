@@ -4,6 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pytest = "*"
+setuptools = "*"
+wheel = "*"
+pytablewriter = "*"
+pytest-md-report = "*"
 
 [dev-packages]
 black = "*"
