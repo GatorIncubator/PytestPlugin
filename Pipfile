@@ -11,6 +11,7 @@ pylint = "*"
 flake8 = "*"
 six = "*"
 pytest = "*"
+yagmail = "*"
 
 [pipenv]
 allow_prereleases = true
