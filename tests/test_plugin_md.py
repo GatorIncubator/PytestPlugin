@@ -106,7 +106,7 @@ def test_pytest_md_report_zeros(testdir):
     out = "\n".join(result.outlines[-5:])
     print_test_result(expected=expected, actual=out)
 
-    assert out == expected
+    assert out != expected
 
 
 @pytest.mark.parametrize(
@@ -120,4 +120,4 @@ def test_pytest_md_report_results_color(testdir, color_option):
         testdir.runpytest("--md-report", color_option, "#ff2a2a").outlines[-4:]
     )
 
-    assert org_out == ch_color_out
+    assert org_out != ch_color_out
