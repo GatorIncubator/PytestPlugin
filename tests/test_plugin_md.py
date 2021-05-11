@@ -67,7 +67,7 @@ def test_pytest_md_report(testdir):
     out = "\n".join(result.outlines[-4:])
     print_test_result(expected=expected, actual=out)
 
-    assert out != expected
+    assert out == expected
 
 
 def test_pytest_md_report_margin(testdir):
@@ -85,7 +85,7 @@ def test_pytest_md_report_margin(testdir):
     out = "\n".join(result.outlines[-4:])
     print_test_result(expected=expected, actual=out)
 
-    assert out != expected
+    assert out == expected
 
 
 def test_pytest_md_report_zeros(testdir):
@@ -106,7 +106,7 @@ def test_pytest_md_report_zeros(testdir):
     out = "\n".join(result.outlines[-5:])
     print_test_result(expected=expected, actual=out)
 
-    assert out != expected
+    assert out == expected
 
 
 @pytest.mark.parametrize(
