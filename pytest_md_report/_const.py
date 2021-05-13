@@ -8,8 +8,8 @@ COLOR_NAMES = "/".join([style.name.lower() for style in list(AnsiFGColor)])
 
 
 class Header:
-    FILEPATH = "filepath"
-    TESTFUNC = "function"
+    PATH = "filepath"
+    FUNC = "function"
     SUBTOTAL = "SUBTOTAL"
 
 
@@ -21,16 +21,16 @@ class ColorPolicy:
 
 
 class ZerosRender:
-    NUMBER = "number"
+    NUM = "number"
     EMPTY = "empty"
-    LIST = (NUMBER, EMPTY)
+    LIST = (NUM, EMPTY)
 
 
 class FGColor:
-    SUCCESS = "SUCCESS"
-    ERROR = "ERROR"
+    PASS = "PASS"
+    FAIL = "FAIL"
     SKIP = "SKIP"
-    GRAYOUT = "GRAYOUT"
+    GRAY = "GRAYOUT"
 
 
 class BGColor:
@@ -45,10 +45,10 @@ class Default:
     ZEROS = ZerosRender.NUMBER
 
     class FGColor:
-        SUCCESS = "light_green"
-        ERROR = "light_red"
+        PASS = "light_green"
+        FAIL = "light_red"
         SKIP = "light_yellow"
-        GRAYOUT = "light_black"
+        GRAY = "light_black"
 
 
 @unique
@@ -94,8 +94,8 @@ class Option(Enum):
             """
         ).format(default=Default.ZEROS),
     )
-    MD_REPORT_SUCCESS_COLOR = (
-        "md-report-success-color",
+    MD_REPORT_PASS_COLOR = (
+        "md-report-pass-color",
         dedent(
             """\
             text color of succeeded results.
@@ -114,8 +114,8 @@ class Option(Enum):
             """
         ).format(names=COLOR_NAMES, default=Default.FGColor.SKIP),
     )
-    MD_REPORT_ERROR_COLOR = (
-        "md-report-error-color",
+    MD_REPORT_FAIL_COLOR = (
+        "md-report-fail-color",
         dedent(
             """\
             text color of failed results.
@@ -147,4 +147,4 @@ class Option(Enum):
 
 
 class HelpMsg:
-    EXTRA_MSG_TEMPLATE = " you can also specify the value with {} environment variable."
+    EXTRA_MSG = " you can also specify the value with {} environment variable."
