@@ -12,7 +12,6 @@ PYFILE_PASS_TEST = dedent(
         assert True
     """
 )
-
 PYFILE_SKIP_TEST = dedent(
     """\
     import pytest
@@ -20,7 +19,6 @@ PYFILE_SKIP_TEST = dedent(
         pytest.skip()
     """
 )
-
 PYFILE_MIX_TESTS = dedent(
     """\
     import pytest
