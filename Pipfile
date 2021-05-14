@@ -9,6 +9,7 @@ setuptools = "*"
 wheel = "*"
 pytablewriter = "*"
 pytest-md-report = "*"
+coverage = "*"
 
 [dev-packages]
 black = "*"
