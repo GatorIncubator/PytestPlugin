@@ -12,14 +12,14 @@ from typepy.error import TypeConversionError
 from ._const import BGColor, ColorPolicy, Default, FGColor, Header, HelpMsg, Option, ZerosRender
 
 
-def zero_to_nullstr(value) -> str:
+def zero_to_empty_str(value) -> str:
     if value == 0:
         return ""
 
     return value
 
 
-def pytest_addoption(parser):
+def pytest_adoption(parser):
     group = parser.getgroup("md report", "make test results report with markdown table format")
 
     group.addoption(
@@ -110,30 +110,30 @@ def pytest_addoption(parser):
     )
 
 
-def is_make_md_report(config: Config) -> bool:
+def create_md_report(config: Config) -> bool:
     if config.option.help:
         return False
 
-    make_report = config.option.md_report
+    create_report = config.option.md_report
 
-    if make_report is None:
+    if create_report is None:
         try:
-            make_report = Bool(
+            create_report = Bool(
                 os.environ.get(Option.MD_REPORT.envvar_str), strict_level=StrictLevel.MIN
             ).convert()
         except TypeConversionError:
-            make_report = None
+            create_report = None
 
-    if make_report is None:
-        make_report = config.getini(Option.MD_REPORT.inioption_str)
+    if create_report is None:
+        create_report = config.getini(Option.MD_REPORT.inioption_str)
 
-    if make_report is None:
+    if create_report is None:
         return False
 
-    return make_report
+    return create_report
 
 
-def _is_ci() -> bool:
+def ci_present() -> bool:
     CI = os.environ.get("CI")
     if not CI:
         return False
@@ -141,12 +141,12 @@ def _is_ci() -> bool:
     return CI.lower() == "true"
 
 
-def _is_travis_ci() -> bool:
+def travis_ci_present() -> bool:
     # https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
     return os.environ.get("TRAVIS") == "true"
 
 
-def _is_appveyor_ci() -> bool:
+def appveyor_ci_present() -> bool:
     # https://www.appveyor.com/docs/environment-variables/
     APPVEYOR = os.environ.get("APPVEYOR")
     if not APPVEYOR:
@@ -155,14 +155,14 @@ def _is_appveyor_ci() -> bool:
     return APPVEYOR.lower() == "true"
 
 
-def _to_int(value) -> Optional[int]:
+def value_to_int(value) -> Optional[int]:
     try:
         return Integer(value, strict_level=StrictLevel.MIN).convert()
     except TypeConversionError:
         return None
 
 
-def retrieve_verbosity_level(config: Config) -> int:
+def get_verbosity_level(config: Config) -> int:
     verbosity_level = config.option.md_report_verbose
 
     if verbosity_level is not None and verbosity_level < 0:
@@ -180,7 +180,7 @@ def retrieve_verbosity_level(config: Config) -> int:
     return verbosity_level
 
 
-def retrieve_report_color(config: Config) -> str:
+def get_report_color(config: Config) -> str:
     report_color = config.option.md_report_color
 
     if not report_color:
@@ -195,7 +195,7 @@ def retrieve_report_color(config: Config) -> str:
     return report_color
 
 
-def retrieve_report_margin(config: Config) -> int:
+def get_report_margin(config: Config) -> int:
     margin = config.option.md_report_margin
 
     if margin is None:
@@ -210,7 +210,7 @@ def retrieve_report_margin(config: Config) -> int:
     return margin
 
 
-def retrieve_report_zeros(config: Config) -> str:
+def get_report_zeros(config: Config) -> str:
     report_zeros = config.option.md_report_zeros
 
     if not report_zeros:
@@ -228,7 +228,7 @@ def retrieve_report_zeros(config: Config) -> str:
     return report_zeros
 
 
-def retrieve_report_results_color(config: Config, color_option: Option, default: str) -> str:
+def get_report_results_color(config: Config, color_option: Option, default: str) -> str:
     results_color = getattr(config.option, color_option.inioption_str)
 
     if not results_color:
@@ -243,17 +243,17 @@ def retrieve_report_results_color(config: Config, color_option: Option, default:
     return results_color
 
 
-def _normalize_stat_name(name: str) -> str:
-    if name == "error":
-        return "errors"
+def normalize_stat_name(name: str) -> str:
+    if name == "fail":
+        return "failures"
 
     return name
 
 
-def retrieve_stat_count_map(reporter: TerminalReporter) -> Dict[str, int]:
+def get_stat_count_map(reporter: TerminalReporter) -> Dict[str, int]:
     stat_count_map = {}
 
-    for name in ["failed", "passed", "skipped", "error", "xfailed", "xpassed"]:
+    for name in ["failed", "passed", "skipped", "fail", "xfailed", "xpassed"]:
         count = len(reporter.getreports(name))
         stat_count_map[name] = count
 
@@ -269,7 +269,7 @@ class ColorRetriever:
         self.__report_color = report_color
         self.__color_map = color_map
 
-    def retrieve_fg_bg_color(self, base_color: str) -> Tuple[str, Optional[str]]:
+    def get_fg_bg_color(self, base_color: str) -> Tuple[str, Optional[str]]:
         bg_color = None  # type: Optional[str]
 
         if (self.__row % 2) == 0:
@@ -307,11 +307,11 @@ def style_filter(cell: Cell, **kwargs: Any) -> Optional[Style]:
 
     headers = writer.headers
     if headers[cell.col] in (Header.FILEPATH, Header.TESTFUNC, Header.SUBTOTAL):
-        error_ct_list = []
+        fail_ct_list = []
         if "failed" in headers:
-            error_ct_list.append(writer.value_matrix[cell.row][headers.index("failed")])
-        if "error" in headers:
-            error_ct_list.append(writer.value_matrix[cell.row][headers.index("error")])
+            fail_ct_list.append(writer.value_matrix[cell.row][headers.index("failed")])
+        if "fail" in headers:
+            fail_ct_list.append(writer.value_matrix[cell.row][headers.index("fail")])
 
         skip_ct_list = []
         if "skipped" in headers:
@@ -321,16 +321,16 @@ def style_filter(cell: Cell, **kwargs: Any) -> Optional[Style]:
         if "xpassed" in headers:
             skip_ct_list.append(writer.value_matrix[cell.row][headers.index("xpassed")])
 
-        error_ct = sum(error_ct_list)
+        fail_ct = sum(fail_ct_list)
         skip_ct = sum(skip_ct_list)
 
-        is_failed = error_ct > 0
+        is_failed = fail_ct > 0
         is_skipped = skip_ct > 0
-        is_passed = error_ct == 0 and skip_ct == 0
+        is_passed = fail_ct == 0 and skip_ct == 0
 
     if is_passed or headers[cell.col] in ("passed"):
         fg_color, bg_color = retriever.retrieve_fg_bg_color(color_map[FGColor.SUCCESS])
-    elif is_failed or headers[cell.col] in ("failed", "error"):
+    elif is_failed or headers[cell.col] in ("failed", "fail"):
         fg_color, bg_color = retriever.retrieve_fg_bg_color(color_map[FGColor.ERROR])
     elif is_skipped or headers[cell.col] in ("skipped", "xfailed", "xpassed"):
         fg_color, bg_color = retriever.retrieve_fg_bg_color(color_map[FGColor.SKIP])
