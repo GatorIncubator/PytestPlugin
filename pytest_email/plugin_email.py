@@ -4,6 +4,7 @@ import yagmail
 import pytest
 import pandas as pd
 from _pytest.terminal import TerminalReporter
+from pytest_md_report import plugin as md
 
 
 def pytest_addoption(parser):
@@ -27,10 +28,21 @@ def pytest_terminal_summary(terminalreporter, config):
     """Sending report to email"""
     passed = len(terminalreporter.stats.get('passed', ""))
     failed = len(terminalreporter.stats.get('failed', ""))
-    total = passed + failed
+    error = len(terminalreporter.stats.get('error', ""))
+    skipped = len(terminalreporter.stats.get('skipped', ""))
+    xfailed = len(terminalreporter.stats.get('xfailed', ""))
+    xpassed = len(terminalreporter.stats.get('xpassed', ""))
+
+    total = passed + failed + error + skipped + xfailed + xpassed
+
     body = {"Passed test": passed,
             "Failed test": failed,
+            "Error test" : error,
+            "Skipped test": skipped,
+            "Xfailed test": xfailed,
+            "Xpassed test": xpassed,
             "Total test": total}
+
     body_df = pd.DataFrame(list(body.items()),columns = ['Status','Amount of test'])
 
     if config.getoption("--mail") is True:

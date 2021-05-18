@@ -26,11 +26,11 @@ jobs:
     - name: Lint with flake8
       run: |
         pipenv install --dev
-        pipenv run flake8 pytestplugin 
+        pipenv run flake8 pytest_email
       #continue-on-error: true
     - name: Lint with pylint
       run: |
-        pipenv run pylint pytestplugin
+        pipenv run pylint pytest_email
       #continue-on-error: true
     - name: Run testing
       run: |
