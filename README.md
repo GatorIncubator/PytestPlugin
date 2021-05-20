@@ -58,7 +58,7 @@ pytest --md-report examples/
 
 Output Example
 
-## Email Plugin (plugin-email) Commands
+## Email Plugin (plugin-email) Usage
 
 - Run command:
 
