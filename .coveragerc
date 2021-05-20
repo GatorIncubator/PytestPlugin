@@ -1,4 +1,4 @@
 
 [run]
-omit=test/*
+omit=test/test_plugin_email.py
 include=pytestplugin*
