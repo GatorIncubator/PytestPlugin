@@ -29,7 +29,7 @@ cd PytestPlugin-Team7.git
 
 This program uses [Pipenv](https://github.com/pypa/pipenv) for dependency management.
 
-- - If needed, install and upgrade the `pipenv` with `pip`:
+- If needed, install and upgrade the `pipenv` with `pip`:
 
   ```bash
   pip install pipenv -U
