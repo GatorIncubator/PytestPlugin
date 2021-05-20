@@ -56,7 +56,7 @@ pytest --md-report examples/
 
 <img src="images/output.png" alt="frequency" style="width:100%"/>
 
-Output
+Output Example
 
 ## Email Plugin (plugin-email) Commands
 
