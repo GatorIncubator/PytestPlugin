@@ -41,7 +41,7 @@ This program uses [Pipenv](https://github.com/pypa/pipenv) for dependency manage
   pipenv install
   ```
 
-## Email plugin: plugin-email
+## Email Plugin (plugin-email) Commands
 
 - Run command:
 
