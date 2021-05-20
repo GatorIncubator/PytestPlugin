@@ -10,15 +10,16 @@ wheel = "*"
 pytablewriter = "*"
 pytest-md-report = "*"
 coverage = "*"
+yagmail = "*"
+pandas = "*"
+six = "*"
 
 [dev-packages]
 black = "*"
 pylint = "*"
 flake8 = "*"
-six = "*"
 pytest = "*"
-yagmail = "*"
-pandas = "*"
+
 
 [pipenv]
 allow_prereleases = true
