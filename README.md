@@ -40,6 +40,21 @@ This program uses [Pipenv](https://github.com/pypa/pipenv) for dependency manage
   ```bash
   pipenv install
   ```
+## Pytest-md-report Installation and Usage
+
+- Install
+
+```
+pip install pytest-md-report
+```
+
+- Run
+
+```
+pytest --md-report examples/
+```
+
+<img src="images/output.png" alt="frequency" style="width:100%"/>
 
 ## Email Plugin (plugin-email) Commands
 
