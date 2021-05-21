@@ -8,12 +8,57 @@
 A pytest plugin to make a test results report with Markdown table format and then sends the Markdown file to a user's email address.
 
 
-Dependencies
-============================================
+## Dependencies
+
 - Python 3.6+
 - `Python package dependencies (automatically installed)`
 
-## Email plugin: plugin-email
+## Installation
+
+You can clone this repository with the following command
+
+```
+git clone git@github.com:allegheny-computer-science-203-s2021/PytestPlugin-Team7.git
+```
+
+`cd` into the project root folder:
+
+```bash
+cd PytestPlugin-Team7
+```
+
+This program uses [Pipenv](https://github.com/pypa/pipenv) for dependency management.
+
+- If needed, install and upgrade the `pipenv` with `pip`:
+
+  ```bash
+  pip install pipenv -U
+  ```
+
+- To create a default virtual environment and use the program:
+
+  ```bash
+  pipenv install
+  ```
+## Pytest-md-report Installation and Usage
+
+- Install
+
+```
+pip install pytest-md-report
+```
+
+- Run
+
+```
+pytest --md-report examples/
+```
+
+<img src="images/output.png" alt="frequency" style="width:100%"/>
+
+Output Example
+
+## Email Plugin (plugin-email) Usage
 
 ### Purpose:
 
