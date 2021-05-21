@@ -74,7 +74,7 @@ First, the user should clone the main repo of this dual plugin by:
 ```
 git clone https://github.com/allegheny-computer-science-203-s2021/PytestPlugin-Team7.git
 ```
-Then, go into this `PytestPlugin-Team7` directory and locate to the file `plugin.py` by th epath of `pytest_email\plugin.py`. Then, transfer the content of this file to the local `conftest.py` file in the project that user want to use this plugin.
+Then, go into this `PytestPlugin-Team7` directory and locate to the file `plugin.py` by the path of `pytest_email\plugin.py`. Then, transfer the whole content of `plugin.py` file into the local `conftest.py` file in the project that user want to use this plugin.
 
 - Finally, within the local directory, run the plugin by the command:
 
@@ -95,4 +95,4 @@ pipenv run pytest --mail --emailfrom="test@gmail.com" --pwd="XXXXXX" --emailto="
 
 The report email send from this plugin have the form of:
 
-![Sample email](image/Sample_email.png)
+![Sample email](images/Sample_email.png)
